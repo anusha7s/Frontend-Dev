@@ -1,0 +1,9 @@
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f7f9fc;padding:40px}
+@keyframes fadeIn {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pricing{display:flex;gap:20px;justify-content:center;align-items:flex-start}
+.card{background:white;padding:24px;border-radius:10px;width:260px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,0.06);transition:transform .3s;animation:fadeIn .6s both}
+.card:hover{transform:translateY(-10px)}
+.popular{transform:scale(1.05);background:#fff6e6;border:2px solid #ffd166}
+
+/* stack below 750px */
+@media (max-width:750px){.pricing{flex-direction:column;align-items:center}}
