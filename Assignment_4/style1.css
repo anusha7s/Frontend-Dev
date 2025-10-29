@@ -1,0 +1,42 @@
+:root{
+--bg: #0f1724; /* custom background */
+--card: #0b1220;
+--accent: #ffd166;
+--text: #eef2f7;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Arial, Helvetica, sans-serif;color:var(--text);background:var(--bg)}
+.container{max-width:1100px;margin:0 auto;padding:0 1rem}
+
+
+/* Fixed header */
+.site-header{position:fixed;top:0;left:0;right:0;background:rgba(6,12,25,0.95);backdrop-filter:blur(4px);z-index:20}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0}
+.logo{font-size:1.25rem;margin:0}
+.main-nav a{color:var(--text);text-decoration:none;margin-left:1rem;font-size:0.95rem}
+
+
+/* Main area — use different units */
+.main{padding-top:5rem /* to account for fixed header */}
+.hero{min-height:60vh;display:flex;align-items:center}
+.profile{display:flex;gap:2rem;align-items:center}
+.profile-img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:4px solid var(--accent)}
+.bio h2{font-size:2rem;margin:0 0 0.5rem 0}
+.bio p{font-size:1rem;line-height:1.55;max-width:40rem}
+
+
+/* Using px, em, %, vh, rem across elements */
+.about{padding:3rem 0 6rem 0;background:linear-gradient(180deg, rgba(255,249,227,0.02), transparent)}
+.about h2{font-size:1.4rem;margin:0 0 0.5rem 0}
+
+
+/* Footer sticks to bottom using flexbox */
+body{display:flex;flex-direction:column;min-height:100vh}
+.site-footer{margin-top:auto;background:var(--card);padding:1rem 0;text-align:center}
+
+
+/* Responsive tweaks */
+@media (max-width:600px){
+.profile{flex-direction:column;text-align:center}
+.profile-img{width:120px;height:120px}
+}

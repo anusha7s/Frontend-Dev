@@ -1,0 +1,51 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia, 'Times New Roman', serif;background:#f4f6f8;color:#102027}
+header{background:#083d77;color:#fff;padding:0.75rem 0}
+header .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1rem}
+header nav a{color:#fff;text-decoration:none;margin-left:1rem}
+
+
+/* Each main section full width and height (visually) */
+main .full{min-height:60vh;display:flex;align-items:center}
+main .content{max-width:1100px;margin:0 auto;padding:3rem}
+
+
+/* Background images (placeholder) */
+.bg-image{background-image:url('city.jpg');background-size:cover;background-position:center}
+
+
+/* Linear gradient section */
+.gradient-linear{background:linear-gradient(90deg,#ffe6e6 0%, #fff0f5 100%)}
+
+
+/* Radial gradient section */
+.gradient-radial{background:radial-gradient(circle at 10% 20%, rgba(255,230,128,0.25), transparent 30%), url('attraction.jpg');background-size:cover}
+
+
+/* Parallax-like fixed backgrounds */
+.bg-fixed{background-image:url('beach.jpg');background-attachment:fixed;background-size:cover;background-position:center}
+.bg-fixed-2{background-image:url('harbor.jpg');background-attachment:fixed;background-size:cover;background-position:right}
+
+
+/* Spacing and borders */
+.content h2{font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+.content p{margin-bottom:1rem;line-height:1.6}
+
+
+/* Headings different sizes and weights */
+#intro h2{font-size:2.2rem;font-weight:800}
+#history h2{font-size:1.8rem;font-weight:600}
+
+
+/* Footer */
+footer{background:#061626;color:#fff;text-align:center;padding:1rem}
+
+
+/* Accessibility note: ensure contrast between text and backgrounds
+Parallax effect demonstrated with background-attachment: fixed on two sections */
+
+
+@media (max-width:700px){
+main .content{padding:1.5rem}
+header .wrap{flex-direction:column;gap:0.5rem}
+}
