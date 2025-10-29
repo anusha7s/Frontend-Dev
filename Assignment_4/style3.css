@@ -1,0 +1,20 @@
+*{box-sizing:border-box}
+body{font-family:Arial, Helvetica, sans-serif;background:#f7fafc;margin:0;padding:2rem}
+.team{display:flex;gap:1.5rem;align-items:stretch}
+.card{flex:1;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 6px 12px rgba(15,23,42,0.08);background:#fff}
+.card h3{margin-top:0}
+.role{font-weight:600;color:#475569;margin-bottom:0.5rem}
+.desc{margin-top:0.5rem;line-height:1.5}
+
+
+/* Highlighted Team Lead card */
+.card.lead{background:#fffbea;border:2px dashed #ffd166}
+
+
+/* Using box model for consistent padding/margins; equal heights achieved by align-items:stretch */
+
+
+/* Responsive: stack to single column below 600px */
+@media (max-width:600px){
+.team{flex-direction:column}
+}
