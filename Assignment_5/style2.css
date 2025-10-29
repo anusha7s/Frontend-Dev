@@ -1,0 +1,16 @@
+*{box-sizing:border-box}body{font-family:Arial;margin:0;padding:20px;background:#fafafa}
+.grid-wrap{max-width:1100px;margin:0 auto}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:16px}
+.card{background:white;padding:18px;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;box-shadow:0 6px 14px rgba(0,0,0,0.06);transition:transform .3s}
+.card:hover{transform:scale(1.05)}
+.price{margin-top:12px;font-weight:700;color:#0077b6}
+
+/* tablet: 2 columns */
+@media (max-width:900px){
+  .products{grid-template-columns:repeat(2,1fr)}
+}
+
+/* mobile: 1 column */
+@media (max-width:480px){
+  .products{grid-template-columns:1fr}
+}
