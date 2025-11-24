@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Ticket Booking</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+    </style>
+</head>
+<body>
+  <h2>Book Movie Ticket</h2>
+  <input type="text" id="name" placeholder="Name"><br><span class="error"></span><br>
+  <input type="email" id="email" placeholder="Email"><br><br><span class="error"></span><br>
+  <input type="number" id="seats" placeholder="Seats (1-10)" min="1" max="10"><br><span class="error"></span><br>
+  <button onclick="bookTicket()">Book Now</button>
+  <div id="ticket"></div>
+
+  <script>
+    function bookTicket() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const seats = parseInt(document.getElementById('seats').value);
+
+      const nameOk = /^[A-Za-z\s]+$/.test(name);
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const seatsOk = seats >= 1 && seats <= 10;
+
+      document.querySelectorAll('.error').forEach(span => span.textContent = "");
+
+      if (!nameOk) document.querySelector('#name + span').textContent = "Name: letters only";
+      if (!emailOk) document.querySelector('#email + span').textContent = "Invalid email";
+      if (!seatsOk) document.querySelector('#seats + span').textContent = "1–10 seats only";
+
+      if (nameOk && emailOk && seatsOk) {
+        const ticket = { name, email, seats };
+        document.getElementById('ticket').innerHTML = `
+          <h3 class="success">Ticket Booked!</h3>
+          <p>Name: ${ticket.name}<br>Email: ${ticket.email}<br>Seats: ${ticket.seats}</p>`;
+        console.log("Booking:", ticket);
+      }
+    }
+  </script>
+</body>
+</html>
