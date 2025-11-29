@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product List Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    input[type="text"] { width: 70%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+    ul { list-style: none; padding: 0; margin-top: 20px; }
+    li { padding: 10px; background: #f9f9f9; margin: 5px 0; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+    li input { border: none; background: transparent; font-size: 16px; width: 60%; }
+    .actions button { margin-left: 5px; padding: 5px 10px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Product List Manager</h2>
+    <input type="text" id="productInput" placeholder="Enter product name" />
+    <button id="addBtn">Add Product</button>
+
+    <ul id="productList"></ul>
+  </div>
+
+  <script>
+    // Q1: Dynamic Product List with Event Delegation
+    const productList = document.getElementById('productList');
+    const addBtn = document.getElementById('addBtn');
+    const input = document.getElementById('productInput');
+
+    // Add new product
+    addBtn.addEventListener('click', () => {
+      const name = input.value.trim();
+      if (!name) return alert("Please enter a product name");
+
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${name}</span>
+        <div class="actions">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        </div>
+      `;
+      productList.appendChild(li);
+      input.value = '';
+    });
+
+    // Event Delegation on <ul>
+    productList.addEventListener('click', (e) => {
+      const target = e.target;
+      const li = target.closest('li');
+
+      if (target.classList.contains('delete')) {
+        li.remove();
+      }
+
+      if (target.classList.contains('edit')) {
+        const span = li.querySelector('span');
+        const currentText = span.textContent;
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentText;
+
+        li.insertBefore(input, span);
+        span.style.display = 'none';
+        input.focus();
+
+        // Auto-save when clicking outside
+        const saveEdit = () => {
+          const newText = input.value.trim() || currentText;
+          span.textContent = newText;
+          span.style.display = '';
+          input.remove();
+        };
+
+        input.addEventListener('blur', saveEdit);
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') input.blur();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

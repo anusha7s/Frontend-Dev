@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Multi-Step Form</title>
+  <style>
+    body { font-family: Arial; display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
+    .form-container { background: white; padding: 30px; border-radius: 10px; width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .step { display: none; }
+    .step.active { display: block; }
+    input { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
+    button { padding: 10px 20px; margin: 5px; }
+    .summary { margin-top: 20px; padding: 15px; background: #e0ffe0; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Register (3 Steps)</h2>
+
+    <div class="step active" id="step1">
+      <label>Name: <input type="text" id="name" /><br>
+      <button onclick="nextStep(1)">Next</button>
+    </div>
+
+    <div class="step" id="step2">
+      Email: <input type="email" id="email" /><br>
+      <button onclick="prevStep(2)">Back</button>
+      <button onclick="nextStep(2)">Next</button>
+    </div>
+
+    <div class="step" id="step3">
+      Password: <input type="password" id="password" /><br>
+      <button onclick="prevStep(3)">Back</button>
+      <button onclick="submitForm()">Submit</button>
+    </div>
+
+    <div id="summary" class="summary" style="display:none;"></div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    let currentStep = 1;
+
+    function showStep(n) {
+      steps.forEach((step, i) => step.classList.toggle('active', i + 1 === n));
+    }
+
+    function nextStep(n) {
+      const input = document.querySelector(`#step${n} input`);
+      if (n === 1 && !input.value.trim()) return alert("Name is required");
+      if (n === 2 && !input.validity.valid) return alert("Valid email required");
+      if (n === 3 && input.value.length < 6) return alert("Password min 6 chars");
+      
+      currentStep++;
+      showStep(currentStep);
+    }
+
+    function prevStep(n) {
+      currentStep--;
+      showStep(currentStep);
+    }
+
+    function submitForm() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = "******";
+
+      document.getElementById('summary').style.display = 'block';
+      document.getElementById('summary').innerHTML = `
+        <strong>Registration Successful!</strong><br>
+        Name: ${name}<br>
+        Email: ${email}<br>
+        Password: ${password}
+      `;
+    }
+
+    showStep(1);
+  </script>
+</body>
+</html>
