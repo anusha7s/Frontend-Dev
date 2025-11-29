@@ -1,5 +1,5 @@
 "use strict";
-
+// Q5: Hoisting Lab – Understanding variable and function hoisting
 console.log("Hoisting Lab Fixed Version\n" + "=".repeat(35));
 
 // var is hoisted → undefined
