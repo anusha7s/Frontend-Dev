@@ -1,5 +1,3 @@
-// Q3: Monthly Expense Tracker with Tax
-
 // Monthly expenses in 5 categories (in ₹ or $)
 const expenses = [
     { category: "Food",     amount: 8000 },

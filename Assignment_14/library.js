@@ -1,4 +1,3 @@
-// Q3: Library Management System
 
 class Book {
     constructor(title, author, isbn) {
