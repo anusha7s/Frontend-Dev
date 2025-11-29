@@ -1,5 +1,3 @@
-// Q1: Scope Conflict Resolver – Understanding var, let, global vs local
-
 let bonus = 5000;                    // Global variable (accessible everywhere)
 console.log("Global bonus (outside):", bonus);
 
