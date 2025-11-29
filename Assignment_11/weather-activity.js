@@ -1,5 +1,3 @@
-// Q5: Weather Activity Planner
-
 const temperature = 28;        // in °C
 const isRaining = false;
 const windSpeed = 15;          // in km/h

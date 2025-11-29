@@ -1,5 +1,3 @@
-// Q4: Academic Performance Evaluator
-
 const studentName = "Rahul";
 const marks = [88, 92, 76, 45, 91];  // 5 subjects
 const totalMarks = marks.reduce((sum, mark) => sum + mark, 0);
