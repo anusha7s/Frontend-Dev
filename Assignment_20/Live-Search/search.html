@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Product Search</title>
+  <style>
+    body { font-family: Arial; padding: 30px; background: #f4f7fa; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; }
+    input { width: 100%; padding: 15px; font-size: 18px; border: 2px solid #007bff; border-radius: 8px; }
+    .results { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+    .product { border: 1px solid #ddd; padding: 15px; text-align: center; border-radius: 8px; }
+    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+    .loading { color: #007bff; font-weight: bold; }
+    .no-results { color: red; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Live Product Search</h1>
+    <input type="text" id="search" placeholder="Type to search products..." autofocus>
+    <div id="loading" class="loading" style="display:none">Searching...</div>
+    <div id="results"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const API_URL = 'http://localhost:3001/products';
+
+      $('#search').on('input', function() {
+        const query = $(this).val().trim();
+        $('#loading').show();
+        $('#results').empty();
+
+        if (query === '') {
+          $('#loading').hide();
+          $('#results').html('<p class="no-results">Start typing to search...</p>');
+          return;
+        }
+
+        $.get(`${API_URL}?q=${query}`)
+          .done(function(data) {
+            $('#loading').hide();
+            if (data.length === 0) {
+              $('#results').html('<p class="no-results">No products found</p>');
+              return;
+            }
+
+            let html = '<div class="results">';
+            data.forEach(p => {
+              html += `
+                <div class="product">
+                  <img src="${p.image}" alt="${p.name}">
+                  <h3>${p.name}</h3>
+                  <p>₹${p.price.toLocaleString()}</p>
+                </div>
+              `;
+            });
+            html += '</div>';
+            $('#results').html(html);
+          })
+          .fail(function() {
+            $('#loading').hide();
+            $('#results').html('<p class="no-results">Error loading data</p>');
+          });
+      });
+    });
+  </script>
+</body>
+</html>
