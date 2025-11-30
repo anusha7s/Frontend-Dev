@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; background: #f9f9f9; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; }
+    select, button { padding: 10px; font-size: 16px; margin: 10px 0; }
+    .task { padding: 15px; border: 1px solid #ddd; margin: 10px 0; border-radius: 8px; }
+    .completed { background: #e8f5e8; text-decoration: line-through; }
+    .high { border-left: 5px solid #d32f2f; }
+    .medium { border-left: 5px solid #f9a825; }
+    .low { border-left: 5px solid #43a047; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Task Manager</h1>
+    <select id="filter">
+      <option value="">All Tasks</option>
+      <option value="priority=high">High Priority</option>
+      <option value="priority=medium">Medium Priority</option>
+      <option value="priority=low">Low Priority</option>
+      <option value="completed=true">Completed</option>
+    </select>
+    <div id="tasks"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    const API = 'http://localhost:3003/tasks';
+
+    function loadTasks(filter = '') {
+      $.get(`${API}${filter ? '?' + filter : ''}`)
+        .done(function(tasks) {
+          $('#tasks').empty();
+          tasks.forEach(task => {
+            const div = $(`
+              <div class="task ${task.priority} ${task.completed ? 'completed' : ''}">
+                <input type="checkbox" ${task.completed ? 'checked' : ''} data-id="${task.id}">
+                <strong>${task.title}</strong> 
+                <small>(${task.priority} priority)</small>
+              </div>
+            `);
+            $('#tasks').append(div);
+          });
+
+          // Toggle completed status
+          $('#tasks input[type="checkbox"]').change(function() {
+            const id = $(this).data('id');
+            const completed = this.checked;
+
+            $.ajax({
+              url: `${API}/${id}`,
+              method: 'PATCH',
+              contentType: 'application/json',
+              data: JSON.stringify({ completed: completed })
+            });
+          });
+        });
+    }
+
+    $('#filter').change(function() {
+      loadTasks(this.value);
+    });
+
+    loadTasks(); // Initial load
+  </script>
+</body>
+</html>

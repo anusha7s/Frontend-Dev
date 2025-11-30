@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    { "id": 1, "title": "Fix login bug", "priority": "high", "completed": false },
+    { "id": 2, "title": "Update documentation", "priority": "low", "completed": true },
+    { "id": 3, "title": "Review PR #123", "priority": "medium", "completed": false },
+    { "id": 4, "title": "Deploy to production", "priority": "high", "completed": false },
+    { "id": 5, "title": "Design new dashboard", "priority": "medium", "completed": true },
+    { "id": 6, "title": "Optimize database queries", "priority": "high", "completed": false }
+  ]
+}
